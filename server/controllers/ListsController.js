@@ -45,6 +45,7 @@ export class ListsController extends BaseController {
 
   async edit(req, res, next) {
     try {
+      req.body.creatorEmail = req.userInfo.email
       let data = await listsService.edit(req.params.id, req.userInfo.email, req.body)
       return res.send(data)
     } catch (error) { next(error) }
@@ -52,6 +53,7 @@ export class ListsController extends BaseController {
 
   async delete(req, res, next) {
     try {
+      req.body.creatorEmail = req.userInfo.email
       await listsService.delete(req.params.id, req.userInfo.email)
       return res.send("Successfully deleted")
     } catch (error) { next(error) }
