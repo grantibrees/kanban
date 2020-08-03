@@ -9,6 +9,7 @@ import { boardsService } from '../services/BoardsService'
 export class BoardsController extends BaseController {
   constructor() {
     super("api/boards")
+    console.log("registering BoardsController");
     this.router
       .use(auth0provider.getAuthorizedUserInfo)
       .get('', this.getAll)
