@@ -2,7 +2,7 @@ import { dbContext } from "../db/DbContext"
 import { BadRequest } from "../utils/Errors"
 
 
-class BoardService {
+class BoardsService {
   async getAll(userEmail) {
     return await dbContext.Boards.find({ creatorEmail: userEmail }).populate("creator", "name picture")
   }
@@ -38,4 +38,4 @@ class BoardService {
 }
 
 
-export const boardService = new BoardService()
+export const boardsService = new BoardsService()
