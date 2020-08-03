@@ -51,6 +51,7 @@ export default new Vuex.Store({
     getBoards({ commit, dispatch }) {
       api.get('boards')
         .then(res => {
+          console.log(res);
           commit('setBoards', res.data)
         })
     },
