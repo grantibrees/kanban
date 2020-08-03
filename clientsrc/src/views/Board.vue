@@ -8,7 +8,14 @@
 <script>
 export default {
   name: "board",
+
+  mounted() {
+    console.log(this.$route.params.boardId);
+    this.$store.dispatch("getActiveBoard", this.$route.params.boardId)
+  },
+
   computed: {
+
     board() {
       //FIXME This does not work on page reload because the activeBoard is empty in the store
       return this.$store.state.activeBoard;
