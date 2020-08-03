@@ -4,6 +4,9 @@ import router from "./router";
 import store from "./store";
 import { Auth0Plugin } from "@bcwdev/auth0-vue";
 import { domain, clientId, audience } from "./authConfig";
+import VueSweetalert2 from "vue-sweetalert2";
+import Swal from "sweetalert2"
+import "sweetalert2/dist/sweetalert2.min.css";
 
 Vue.use(Auth0Plugin, {
   domain,
