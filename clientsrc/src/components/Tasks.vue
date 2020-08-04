@@ -1,6 +1,7 @@
 <template>
   <div class="tasks">
     <h1>{{taskData.title}}</h1>
+    <p>comments: {{taskData.comments.length}}</p>
   </div>
 </template>
 
