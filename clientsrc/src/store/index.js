@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import api from "../axiosService"
 import router from '../router/index'
 import BoardModule from "./BoardModule"
+import ListModule from "./ListModule"
 
 Vue.use(Vuex)
 
@@ -15,7 +16,8 @@ export default new Vuex.Store({
   state: {
     user: {},
     boards: [],
-    activeBoard: {}
+    activeBoard: {},
+    lists: []
   },
   mutations: {
     setUser(state, user) {
@@ -26,6 +28,10 @@ export default new Vuex.Store({
     },
     setActiveBoard(state, activeBoardData) {
       state.activeBoard = activeBoardData
+    },
+    setLists(state, listData) {
+      debugger
+      state.lists = listData
     }
   },
   actions: {
@@ -44,22 +50,10 @@ export default new Vuex.Store({
         console.error(err)
       }
     },
-    //#endregion
 
-
-    //#region -- BOARDS --
-
-
-    //#endregion
-
-
-    //#region -- LISTS --
-
-
-
-    //#endregion
   },
   modules: {
-    BoardModule
+    BoardModule,
+    ListModule
   }
 })
