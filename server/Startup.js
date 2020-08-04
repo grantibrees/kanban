@@ -8,7 +8,7 @@ import auth0provider from "@bcwdev/auth0provider";
 export default class Startup {
   static ConfigureGlobalMiddleware(app) {
     // NOTE Configure and Register Middleware
-    let whitelist = ["http://localhost:8080"];
+    let whitelist = ["http://localhost:8080", "http://localhost:8081"];
     let corsOptions = {
       origin: function (origin, callback) {
         let originIsWhitelisted = whitelist.indexOf(origin) !== -1;
@@ -59,7 +59,7 @@ export default class Startup {
       if (error.status == 500) {
         console.error(error); // should write to external
       }
-      res.status(error.status).send({ error:{ message: error.toString(), status: error.status }, url: req.url });
+      res.status(error.status).send({ error: { message: error.toString(), status: error.status }, url: req.url });
     });
   }
 }

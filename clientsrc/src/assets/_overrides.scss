@@ -9,5 +9,8 @@
 }
 
 .page-height{
-  height: inherit !important;
+  height: 100vh !important;
   }
+  .list-height{
+    min-height: 100% !important;
+    }

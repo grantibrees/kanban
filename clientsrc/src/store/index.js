@@ -30,7 +30,6 @@ export default new Vuex.Store({
       state.activeBoard = activeBoardData
     },
     setLists(state, listData) {
-      debugger
       state.lists = listData
     }
   },
