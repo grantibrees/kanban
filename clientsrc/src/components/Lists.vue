@@ -14,7 +14,7 @@
         </form>
       </div>
     </div>
-    <tasks v-for="task in tasks" :taskData="task" :key="task.id" />
+    <tasks v-for="task in tasksData" :taskData="task" :key="task.id" />
   </div>
 </template>
 
@@ -30,20 +30,27 @@ export default {
     };
   },
   props: ["listData"],
+  mounted() {
+    this.$store.dispatch("getTasks", this.listData.id);
+  },
   computed: {
     lists() {
       return this.$store.state.lists;
+    },
+    tasksData() {
+      return this.$store.state.tasks;
     },
   },
 
   methods: {
     addTask() {
+      debugger;
       let payload = {
         title: this.titleData,
-        listId: listData.id,
+        listId: this.listData.id,
       };
-      debugger;
       this.$store.dispatch("addTask", payload);
+      this.titleData = "";
     },
   },
   components: {

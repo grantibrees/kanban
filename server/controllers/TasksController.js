@@ -14,7 +14,7 @@ export class TasksController extends BaseController {
     this.router
       .use(auth0provider.getAuthorizedUserInfo)
       .get('', this.getAll)
-      .get('/:id', this.getById)
+      .get('/:listId', this.getById)
       .post('', this.create)
       .post('/:id/comments', this.addComments)
       .delete("/:id/comments/:commentId", this.deleteComment)
@@ -35,7 +35,8 @@ export class TasksController extends BaseController {
 
   async getById(req, res, next) {
     try {
-      let data = await tasksService.getById(req.params.id, req.userInfo.email)
+      req.body.creatorEmail = req.userInfo.email
+      let data = await tasksService.getById(req.params.listId, req.userInfo.email)
       return res.send(data)
     } catch (error) { next(error) }
   }

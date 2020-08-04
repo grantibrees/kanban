@@ -4,6 +4,7 @@ import api from "../axiosService"
 import router from '../router/index'
 import BoardModule from "./BoardModule"
 import ListModule from "./ListModule"
+import TaskModule from "./TaskModule"
 
 Vue.use(Vuex)
 
@@ -17,7 +18,8 @@ export default new Vuex.Store({
     user: {},
     boards: [],
     activeBoard: {},
-    lists: []
+    lists: [],
+    tasks: []
   },
   mutations: {
     setUser(state, user) {
@@ -31,6 +33,10 @@ export default new Vuex.Store({
     },
     setLists(state, listData) {
       state.lists = listData
+    },
+    setTasks(state, taskData) {
+      debugger
+      state.tasks.push(taskData)
     }
   },
   actions: {
@@ -53,6 +59,7 @@ export default new Vuex.Store({
   },
   modules: {
     BoardModule,
-    ListModule
+    ListModule,
+    TaskModule
   }
 })

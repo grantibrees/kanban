@@ -1,16 +1,6 @@
 <template>
-  <div class="home">
+  <div class="home mt-5">
     <h1>This is your home page.</h1>
-    <button
-      type="button"
-      class="btn btn-primary btn-lg"
-      data-toggle="modal"
-      data-target="#one"
-    >Modal 1</button>
-    <QuickModal id="one" :key="1">
-      <div slot="title">work?</div>
-      <div slot="body">please?</div>
-    </QuickModal>
   </div>
 </template>
 

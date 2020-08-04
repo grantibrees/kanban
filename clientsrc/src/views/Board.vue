@@ -1,10 +1,10 @@
 <template>
   <div class="board container-fluid">
-    <div>
+    <div class="m-5">
       <h1 v-if="board.title">{{board.title}}</h1>
       <h1 v-else>Loading...</h1>
     </div>
-    <div>
+    <div class="mt-5">
       <button
         type="button"
         class="btn btn-primary btn-lg"

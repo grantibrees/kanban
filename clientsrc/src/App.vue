@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <navbar />
-  <div class="spacing"></div>
-    <router-view/>
+    <div class="spacing"></div>
+    <router-view />
   </div>
 </template>
 
@@ -21,8 +21,8 @@ export default {
     }
   },
   components: {
-    Navbar
-  }
+    Navbar,
+  },
 };
 </script>
 
@@ -53,7 +53,7 @@ export default {
   color: #42b983;
 }
 
-.spacing{
-height: 30px;
+.spacing {
+  height: 30px;
 }
 </style>
