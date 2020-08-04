@@ -33,8 +33,15 @@ class TasksService {
 
   async deleteComment(id, commentId) {
     return await dbContext.Tasks.findByIdAndUpdate(
-      { _id: commentId },
+      { _id: id },
       { $pull: { comments: { _id: commentId } } },
+      { new: true }
+    );
+  }
+  async editComment(id, commentId, body) {
+    return await dbContext.Tasks.findOneAndUpdate(
+      { "_id": id, "comments._id": commentId },
+      { $set: { "comments.$": body } },
       { new: true }
     );
   }
