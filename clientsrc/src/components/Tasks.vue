@@ -1,6 +1,6 @@
 <template>
   <div class="tasks">
-    <h1>hello</h1>
+    <h1>{{taskData.title}}</h1>
   </div>
 </template>
 

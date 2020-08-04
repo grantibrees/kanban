@@ -38,7 +38,7 @@ export default {
       return this.$store.state.lists;
     },
     tasksData() {
-      return this.$store.state.tasks;
+      return this.$store.state.tasks[this.listData.id];
     },
   },
 

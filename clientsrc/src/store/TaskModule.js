@@ -18,7 +18,11 @@ export default {
       api.get('tasks/' + listId)
         .then(res => {
           console.log(res);
-          commit('setTasks', res.data)
+          let data = {
+            listId: listId,
+            tasks: res.data
+          }
+          commit('setTasks', data)
         })
     },
     async addTask({ commit, dispatch }, payload) {
