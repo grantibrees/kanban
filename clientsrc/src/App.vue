@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <navbar />
-    <router-view />
+  <div class="spacing"></div>
+    <router-view/>
   </div>
 </template>
 
@@ -50,5 +51,9 @@ export default {
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+.spacing{
+height: 30px;
 }
 </style>
