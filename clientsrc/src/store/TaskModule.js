@@ -14,7 +14,6 @@ export default {
   },
   actions: {
     getTasks({ commit, dispatch }, listId) {
-      debugger
       api.get('tasks/' + listId)
         .then(res => {
           console.log(res);
@@ -27,7 +26,6 @@ export default {
     },
     async addTask({ commit, dispatch }, payload) {
       try {
-        debugger
         let res = await api.post('tasks/', payload)
         console.log(res.data);
         dispatch('getTasks', payload.listId)

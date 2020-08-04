@@ -44,7 +44,6 @@ export default {
 
   methods: {
     addTask() {
-      debugger;
       let payload = {
         title: this.titleData,
         listId: this.listData.id,
