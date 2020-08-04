@@ -1,3 +1,13 @@
 .btn-primary{
   color: $light;
 }
+
+.row.overflow-page{
+    width: 100vw;
+    flex-wrap: nowrap !important;
+  overflow-x: scroll !important;
+}
+
+.page-height{
+  height: inherit !important;
+  }

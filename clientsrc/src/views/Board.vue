@@ -1,5 +1,5 @@
 <template>
-  <div class="board">
+  <div class="board container-fluid vh-50">
     <div>
       <h1 v-if="board.title">{{board.title}}</h1>
       <h1 v-else>Loading...</h1>
@@ -12,7 +12,7 @@
         data-target="#one"
       >Modal 1</button>
     </div>
-    <div class="row">
+    <div class="row overflow-page page-height">
       <Lists v-for="list in listsData" :listData="list" :key="list.id" />
     </div>
     <div>

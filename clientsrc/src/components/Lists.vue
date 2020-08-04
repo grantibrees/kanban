@@ -1,6 +1,6 @@
 <template>
-  <div class="lists col-4">
-    <h3>{{listData.title}}</h3>
+  <div class="lists minw border border-black my-4 mx-2 px-0">
+    <h3 class="bg-success mx-0 px-2 text-nowrap ">{{listData.title}}</h3>
     <!-- <tasks v-for="task in tasks" :taskData="task" :key="task.id" /> -->
   </div>
 </template>
@@ -28,4 +28,7 @@ export default {
 
 
 <style scoped>
+.minw{
+  min-width: 20rem;
+}
 </style>
