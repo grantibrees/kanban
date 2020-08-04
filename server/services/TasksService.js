@@ -3,6 +3,7 @@ import { BadRequest } from "../utils/Errors"
 
 
 class TasksService {
+
   async getAll(userEmail) {
     return await dbContext.Tasks.find({ creatorEmail: userEmail }).populate("creator", "name picture")
   }
@@ -18,6 +19,24 @@ class TasksService {
   async create(rawData) {
     let data = await dbContext.Tasks.create(rawData)
     return data
+  }
+
+  async addComment(id, body) {
+    try {
+      return await dbContext.Tasks.findOneAndUpdate(
+        { _id: id },
+        { $addToSet: { comments: body } },
+        { new: true }
+      )
+    } catch (error) { console.error(error) }
+  }
+
+  async deleteComment(id, commentId) {
+    return await dbContext.Tasks.findByIdAndUpdate(
+      { _id: commentId },
+      { $pull: { comments: { _id: commentId } } },
+      { new: true }
+    );
   }
 
   async edit(id, userEmail, update) {

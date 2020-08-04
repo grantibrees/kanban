@@ -7,13 +7,17 @@ import { tasksService } from '../services/TasksService'
 
 //PUBLIC
 export class TasksController extends BaseController {
+
+
   constructor() {
     super("api/tasks")
     this.router
       .use(auth0provider.getAuthorizedUserInfo)
       .get('', this.getAll)
       .get('/:id', this.getById)
-      .post('', this.create)
+      .post('/id', this.create)
+      .post('/id/comments', this.addComments)
+      .delete("/:id/comments/:commentId", this.deleteComment)
       .put('/:id', this.edit)
       .delete('/:id', this.delete)
   }
@@ -42,7 +46,13 @@ export class TasksController extends BaseController {
       return res.status(201).send(data)
     } catch (error) { next(error) }
   }
-
+  async addComments(req, res, next) {
+    try {
+      req.body.creatorEmail = req.userInfo.email
+      let data = await tasksService.addComment(req.params.id, req.body)
+      return res.send(data)
+    } catch (error) { console.error(error) }
+  }
   async edit(req, res, next) {
     try {
       req.body.creatorEmail = req.userInfo.email
@@ -56,6 +66,14 @@ export class TasksController extends BaseController {
       req.body.creatorEmail = req.userInfo.email
       await tasksService.delete(req.params.id, req.userInfo.email)
       return res.send("Successfully deleted")
+    } catch (error) { next(error) }
+  }
+  async deleteComment(req, res, next) {
+    try {
+      let resp = await tasksService.deleteComment(req.params.id, req.params.commentId)
+      if (resp) {
+        res.send("Deleted Comment")
+      }
     } catch (error) { next(error) }
   }
 }
