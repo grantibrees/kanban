@@ -38,4 +38,4 @@ class TasksService {
 }
 
 
-export const boardsService = new TasksService()
+export const tasksService = new TasksService()
