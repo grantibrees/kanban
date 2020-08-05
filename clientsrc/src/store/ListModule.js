@@ -13,18 +13,22 @@ export default {
 
   },
   actions: {
-    getLists({ commit, dispatch }) {
-      api.get('lists')
+    getLists({ commit, dispatch }, boardId) {
+      api.get('lists' + boardId)
         .then(res => {
           console.log(res);
-          commit('setLists', res.data)
+          let data = {
+            boardId: boardId,
+            lists: res.data
+          }
+          commit('setLists', data)
         })
     },
     async addList({ commit, dispatch }, payload) {
       try {
         let res = await api.post('lists/' + payload.boardId, payload)
         console.log(res.data);
-        dispatch('getLists')
+        dispatch('getLists', payload.boardId)
       } catch (error) { console.error(error) }
     },
 
