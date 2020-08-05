@@ -80,6 +80,9 @@ export default {
     listsData() {
       return this.$store.state.lists;
     },
+    listsData() {
+      return this.$store.state.lists[this.$route.params.boardId];
+    },
   },
   components: { quickModal, Lists },
   props: ["boardId"],

@@ -1,11 +1,11 @@
 <template>
   <div class="tasks border border-black">
-    <div data-toggle="modal" :data-target="'#task-' + taskData.listId">
+    <div data-toggle="modal" :data-target="'#task-' + taskData.id">
       <h1>{{taskData.title}}</h1>
     </div>
     <p>comments: {{taskData.comments.length}}</p>
 
-    <QuickModal :id="'task-' + taskData.listId" :key="'key-' + taskData.listId">
+    <QuickModal :id="'task-' + taskData.id" :key="'key-' + taskData.id">
       <div slot="title">{{taskData.title}}</div>
 
       <div slot="taskDescription">
@@ -14,10 +14,10 @@
             <div>
               <div class="col-12">
                 <div class="row">
-                  <div @click="switchShow" v-show="taskData.body " v class="col-10">{{taskBody}}</div>
+                  <div @click="switchShow" v-show="taskBody" class="col-10">{{taskBody}}</div>
                   <div
                     @click="switchShow"
-                    v-show="!taskData.body "
+                    v-show="!taskBody"
                     class="col-10"
                   >Please insert a description...</div>
                   <div class="col-2">
@@ -33,14 +33,20 @@
         </div>
 
         <div class="row">
-          <div v-if="taskData.body">
-            <div v-if="showDescriptForm">
-              <div class="form-group">
-                <form @submit.prevent="putTaskDescription">
-                  <input type="text" class="form-control" v-model="taskBody" />
-                  <button @click="switchShow" type="submit" class="btn btn-success">save</button>
-                </form>
-              </div>
+          <!-- <div v-if="taskData.body"> -->
+          <div v-if="showDescriptForm">
+            <div class="form-group">
+              <form @submit.prevent="putTaskDescription">
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="taskBody"
+                  placeholder="Write a description here"
+                />
+
+                <button @click="switchShow" type="submit" class="btn btn-success">save</button>
+              </form>
+              <!-- </div> -->
             </div>
           </div>
         </div>
@@ -61,7 +67,11 @@
                 />
               </div>
               <div class="col-2">
-                <button slot="inputButton" class="btn btn-sm btn-outline-success">submit</button>
+                <button
+                  @click="addComment"
+                  slot="inputButton"
+                  class="btn btn-sm btn-outline-success"
+                >submit</button>
               </div>
             </div>
           </div>
@@ -106,6 +116,13 @@ export default {
     switchShow() {
       this.showDescription = !this.showDescription;
       this.showDescriptForm = !this.showDescriptForm;
+    },
+    addComment() {
+      let payload = {
+        body: this.commentBody,
+        taskId: this.taskData.id,
+      };
+      this.$store.dispatch("addComment", payload);
     },
   },
 

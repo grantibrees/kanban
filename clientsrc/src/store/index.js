@@ -32,7 +32,8 @@ export default new Vuex.Store({
       state.activeBoard = activeBoardData
     },
     setLists(state, data) {
-      Vue.set(state.tasks, data.boardId, data.lists)
+
+      Vue.set(state.lists, data.boardId, data.lists)
     },
     setTasks(state, data) {
       Vue.set(state.tasks, data.listId, data.tasks)

@@ -14,13 +14,14 @@ export default {
   },
   actions: {
     getLists({ commit, dispatch }, boardId) {
-      api.get('lists/' + boardId)
+      api.get('boards/' + boardId + '/lists')
         .then(res => {
           console.log(res);
           let data = {
             boardId: boardId,
             lists: res.data
           }
+
           commit('setLists', data)
         })
     },

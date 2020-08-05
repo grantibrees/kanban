@@ -14,7 +14,7 @@ export default {
   },
   actions: {
     getTasks({ commit, dispatch }, listId) {
-      api.get('tasks/' + listId)
+      api.get('lists/' + listId + '/tasks')
         .then(res => {
           console.log(res);
           let data = {
@@ -33,14 +33,22 @@ export default {
     },
     async editTaskDescription({ commit, dispatch }, payload) {
       try {
-        debugger
+
         let res = await api.put("tasks/" + payload.taskId, payload)
         console.log(res);
 
       } catch (error) { console.error(error) }
-    }
+    },
+    async addComment({ commit, dispatch }, payload) {
+      try {
+        let res = await api.post('tasks/' + payload.taskID + '/comments', payload.body)
+        console.log(res);
+        // commit('addComment', payload.body)
+      } catch (error) { console.error(error) }
 
-  },
+
+    }
+  }
 
 }
 
