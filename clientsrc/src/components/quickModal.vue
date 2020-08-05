@@ -10,18 +10,26 @@
     >
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header">
-            <slot name="title">Title</slot>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
           <div class="modal-body">
-            <slot name="body"></slot>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save</button>
+            <div class="container-fluid" name="lists">
+              <div class="row">
+                <div class="col-11">
+                  <slot name="title"></slot>
+                </div>
+                <div class="col-1">
+                  <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              </div>
+              <div class="row">
+                <slot name="listBody"></slot>
+                <slot name="taskDescription"></slot>
+                <slot name="taskBody"></slot>
+                <slot class="commentsDisplay"></slot>
+                <slot name="commentsForm"></slot>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -19,13 +19,30 @@
     </div>
     <div>
       <quickModal id="one" :key="1">
-        <form slot="body" @submit.prevent="addList">
-          <div class="form-group">
-            <label for>Title</label>
-            <input v-model="title" type="text" class="form-control" placeholder />
-            <button class="btn btn-sm btn-outline-success">submit</button>
-          </div>
-        </form>
+        <div slot="title">{{board.title}}</div>
+        <div slot="listBody">
+          <form @submit.prevent="addList">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-12">
+                  <label for>List Name</label>
+                </div>
+                <div class="col-10">
+                  <input
+                    slot="inputForm"
+                    v-model="title"
+                    type="text"
+                    class="form-control"
+                    placeholder
+                  />
+                </div>
+                <div class="col-2">
+                  <button slot="inputButton" class="btn btn-sm btn-outline-success">submit</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
       </quickModal>
     </div>
   </div>
