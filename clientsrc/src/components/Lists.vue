@@ -50,6 +50,7 @@ export default {
       };
       this.$store.dispatch("addTask", payload);
       this.titleData = "";
+      this.showTaskForm = !this.showTaskForm;
     },
   },
   components: {
