@@ -37,7 +37,7 @@
             <div v-if="showDescriptForm">
               <div class="form-group">
                 <form @submit.prevent="putTaskDescription">
-                  <input type="text" class="form-control" :value="taskBody" />
+                  <input type="text" class="form-control" v-model="taskBody" />
                   <button @click="switchShow" type="submit" class="btn btn-success">save</button>
                 </form>
               </div>
@@ -66,6 +66,9 @@
             </div>
           </div>
         </div>
+        <div slot="commentsDisplay" class="row">
+          <Comments v-for="comment in taskData.comments" :commentData="comment" :key="comment._id" />
+        </div>
       </div>
     </QuickModal>
   </div>
@@ -74,6 +77,7 @@
 
 <script>
 import QuickModal from "../components/QuickModal";
+import Comments from "../components/Comments";
 export default {
   name: "tasks",
   data() {
@@ -95,7 +99,7 @@ export default {
     putTaskDescription() {
       let payload = {
         body: this.taskBody,
-        listId: this.taskData.listId,
+        taskId: this.taskData.id,
       };
       this.$store.dispatch("editTaskDescription", payload);
     },
@@ -105,7 +109,7 @@ export default {
     },
   },
 
-  components: { QuickModal },
+  components: { QuickModal, Comments },
 };
 </script>
 

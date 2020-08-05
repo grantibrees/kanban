@@ -33,7 +33,8 @@ export default {
     },
     async editTaskDescription({ commit, dispatch }, payload) {
       try {
-        let res = await api.put("tasks/" + payload.listId, payload.body)
+        debugger
+        let res = await api.put("tasks/" + payload.taskId, payload)
         console.log(res);
 
       } catch (error) { console.error(error) }

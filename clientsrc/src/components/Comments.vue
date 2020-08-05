@@ -1,5 +1,8 @@
 <template>
-  <div class="comments"></div>
+  <div class="comments col-12">
+    <h5>By: {{commentData.creatorEmail}}</h5>
+    <p>{{commentData.body}}</p>
+  </div>
 </template>
 
 
