@@ -8,7 +8,7 @@ class ListsService {
   }
 
   async getById(id, userEmail) {
-    let data = await dbContext.Lists.find({ _id: id, creatorEmail: userEmail })
+    let data = await dbContext.Lists.find({ boardid: id, creatorEmail: userEmail })
     if (!data) {
       throw new BadRequest("Invalid ID or you do not own this list")
     }
@@ -21,7 +21,7 @@ class ListsService {
   }
 
   async edit(id, userEmail, update) {
-    let data = await dbContext.Lists.findOneAndUpdate({ _id: id, creatorEmail: userEmail }, update, { new: true })
+    let data = await dbContext.Lists.findOneAndUpdate({ boardId: id, creatorEmail: userEmail }, update, { new: true })
     if (!data) {
       throw new BadRequest("Invalid ID or you do not own this list");
     }

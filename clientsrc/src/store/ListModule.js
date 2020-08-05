@@ -14,7 +14,7 @@ export default {
   },
   actions: {
     getLists({ commit, dispatch }, boardId) {
-      api.get('lists' + boardId)
+      api.get('lists/' + boardId)
         .then(res => {
           console.log(res);
           let data = {

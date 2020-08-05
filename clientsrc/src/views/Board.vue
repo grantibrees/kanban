@@ -61,7 +61,7 @@ export default {
   mounted() {
     console.log(this.$route.params.boardId);
     this.$store.dispatch("getActiveBoard", this.$route.params.boardId);
-    this.$store.dispatch("getLists");
+    this.$store.dispatch("getLists", this.$route.params.boardId);
   },
   methods: {
     addList() {
