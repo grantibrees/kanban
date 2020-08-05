@@ -9,48 +9,52 @@
       <div slot="title">{{taskData.title}}</div>
 
       <div slot="taskDescription">
-
-        <div class="row">
-        <div v-if="taskData.body.length > 1">
-          <div class="col-12">
-            <div class="row">
-              <div class="col-10">
-          {{taskdata.body}}
-          </div>
-          <div class="col-2">
-<button class="btn btn-outline-primary btn-sm" @click="showDescriptForm = !showDescriptForm"
-      >Edit</button>
-          </div>
-          </div>
-          </div>
+        <div v-if="showDescriptForm == false">
+          <div class="row">
+            <div>
+              <div class="col-12">
+                <div class="row">
+                  <div @click="switchShow" v-show="taskData.body " v class="col-10">{{taskBody}}</div>
+                  <div
+                    @click="switchShow"
+                    v-show="!taskData.body "
+                    class="col-10"
+                  >Please insert a description...</div>
+                  <div class="col-2">
+                    <button
+                      class="btn btn-outline-primary btn-sm"
+                      @click="showDescriptForm = !showDescriptForm"
+                    >Edit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="row">
-        <div v-if="taskData.body.length < 1">
-          <button
-        class="btn btn-outline-primary btn-sm"
-        @click="showDescriptForm = !showDescriptForm"
-      >+</button>
-    <div v-if="showDescriptForm">
-      <div class="form-group">
-        <form @submit.prevent="putTaskDescription">
-          <input type="text" v-model="titleData" class="form-control" placeholder="Add Task..." />
-        </form>
-      </div>
-    </div></div></div>
+          <div v-if="taskData.body">
+            <div v-if="showDescriptForm">
+              <div class="form-group">
+                <form @submit.prevent="putTaskDescription">
+                  <input type="text" class="form-control" :value="taskBody" />
+                  <button @click="switchShow" type="submit" class="btn btn-success">save</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
 
-      <div slot="taskBody">
-
+        <div slot="taskBody">
           <div class="form-group">
             <div class="row">
               <div class="col-12">
-                <label for>Task Name</label>
+                <label for>Add a Comment</label>
               </div>
               <div class="col-10">
                 <input
                   slot="inputForm"
-                  v-model="title"
+                  v-model="commentBody"
                   type="text"
                   class="form-control"
                   placeholder
@@ -61,6 +65,7 @@
               </div>
             </div>
           </div>
+        </div>
       </div>
     </QuickModal>
   </div>
@@ -73,8 +78,10 @@ export default {
   name: "tasks",
   data() {
     return {
-      showDescriptForm: false
-      
+      showDescriptForm: false,
+      showDescription: true,
+      commentBody: "",
+      taskBody: this.taskData.body,
     };
   },
   props: ["taskData"],
@@ -84,7 +91,19 @@ export default {
     },
   },
 
-  methods: {},
+  methods: {
+    putTaskDescription() {
+      let payload = {
+        body: this.taskBody,
+        listId: this.taskData.listId,
+      };
+      this.$store.dispatch("editTaskDescription", payload);
+    },
+    switchShow() {
+      this.showDescription = !this.showDescription;
+      this.showDescriptForm = !this.showDescriptForm;
+    },
+  },
 
   components: { QuickModal },
 };

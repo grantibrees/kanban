@@ -31,6 +31,13 @@ export default {
         dispatch('getTasks', payload.listId)
       } catch (error) { console.error(error) }
     },
+    async editTaskDescription({ commit, dispatch }, payload) {
+      try {
+        let res = await api.put("tasks/" + payload.listId, payload.body)
+        console.log(res);
+
+      } catch (error) { console.error(error) }
+    }
 
   },
 
