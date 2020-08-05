@@ -11,7 +11,7 @@ const Task = new Schema({
   title: { type: String, required: true },
   creatorEmail: { type: String, required: true },
   listId: { type: ObjectId, ref: 'List', required: true },
-  body: { type: String, required: true, default: "" },
+  body: { type: String, required: false, default: "" },
   comments: [commentContent]
 }, { timestamps: true, toJSON: { virtuals: true } })
 
