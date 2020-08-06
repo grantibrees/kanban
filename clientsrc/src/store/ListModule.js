@@ -13,6 +13,7 @@ export default {
 
   },
   actions: {
+
     getLists({ commit, dispatch }, boardId) {
       api.get('boards/' + boardId + '/lists')
         .then(res => {
@@ -25,6 +26,7 @@ export default {
           commit('setLists', data)
         })
     },
+
     async addList({ commit, dispatch }, payload) {
       try {
         let res = await api.post('lists/' + payload.boardId, payload)
@@ -32,12 +34,13 @@ export default {
         dispatch('getLists', payload.boardId)
       } catch (error) { console.error(error) }
     },
+
     async deleteList({ commit, dispatch }, payload) {
       try {
         let res = await api.delete('boards/' + payload.boardId + "/lists/" + payload.listId)
         dispatch("getLists", payload.boardId)
       } catch (error) { console.error(error) }
-    }
+    },
 
   },
 

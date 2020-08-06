@@ -37,5 +37,12 @@ export default {
           dispatch('getBoards')
         })
     },
-  }
+
+    async deleteBoard({ commmit, dispatch }, boardId) {
+      try {
+        let res = await api.delete('boards/' + boardId)
+        dispatch("getBoards")
+      } catch (error) { console.error(error) }
+    },
+  },
 }
