@@ -1,5 +1,5 @@
 <template>
-  <div class="lists minw border border-black my-4 mx-2 px-0">
+  <div class="lists minw border border-black my-4 mx-2 px-0" dropzone="zone" @dragover.prevent @drop.prevent="moveTask()">
     <h3 class="bg-success mx-0 px-2 text-nowrap">
       {{listData.title}}
       <button
@@ -14,7 +14,7 @@
         </form>
       </div>
     </div>
-    <tasks v-for="task in tasksData" :taskData="task" :key="task.id" />
+    <tasks v-for="task in tasksData" :taskData="task" :key="task.id" draggable="true" @dragstart="reorderTask(task, index)"/>
   </div>
 </template>
 
@@ -30,6 +30,7 @@ export default {
     };
   },
   props: ["listData"],
+
   mounted() {
     this.$store.dispatch("getTasks", this.listData.id);
   },
@@ -51,6 +52,22 @@ export default {
       this.$store.dispatch("addTask", payload);
       this.titleData = "";
       this.showTaskForm = !this.showTaskForm;
+    },
+
+    moveTask() {
+      let moveData = {
+        newListId: this.listData.id,
+        oldListId: this.tempTask.oldList.id,
+        taskToMove: this.tempTask.task,
+      }
+    },
+
+    reorderTask() {
+      console.log(item, index);
+      this.$store.dispatch("setTaskToMove", {
+        task: task,
+        oldList: this.listData
+      });
     },
   },
   components: {

@@ -1,6 +1,6 @@
 <template>
-  <div class="tasks border border-black">
-    <div data-toggle="modal" :data-target="'#task-' + taskData.id">
+  <div class="tasks border border-black" @dragstart="moveTask()">
+    <div data-toggle="modal" :data-target="'#task-' + taskData.listId">
       <h1>{{taskData.title}}</h1>
     </div>
     <p>comments: {{taskData.comments.length}}</p>
@@ -124,6 +124,9 @@ export default {
     switchShow() {
       this.showDescription = !this.showDescription;
       this.showDescriptForm = !this.showDescriptForm;
+    },
+    moveTask() {
+      this.$emit("dragstart");
     },
     addComment() {
       let payload = {

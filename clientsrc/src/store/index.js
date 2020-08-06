@@ -19,7 +19,8 @@ export default new Vuex.Store({
     boards: [],
     activeBoard: {},
     lists: {},
-    tasks: {}
+    tasks: {},
+    tempTask: {},
   },
   mutations: {
     setUser(state, user) {
@@ -39,11 +40,24 @@ export default new Vuex.Store({
 
       Vue.set(state.tasks, data.listId, data.tasks)
     },
+    setTasktoMove(state, taskData) {
+      state.tempTask = taskData;
+    },
+    removeFromList(state, moveData) {
+      let list = state.lists.find(l => l.id == moveData.oldListId)
+      list.tasks = list.tasks.filter(i => i.id != moveData.taskToMove.id)
+    },
+    addToList(state, moveData) {
+      let list = state.lists.find(l => l.id == moveData.oldListId)
+      list.tasks.push(moveData.taskToMove)
+
     setComments(state, data) {
 
       Vue.set(state.tasks, data.listId, data.newTask)
 
     }
+
+
   },
   actions: {
     //#region -- AUTH STUFF --

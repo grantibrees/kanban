@@ -39,6 +39,16 @@ export default {
 
       } catch (error) { console.error(error) }
     },
+
+    setTaskToMove({commit, dispatch}, data) {
+      commit("setTaskToMove", data)
+    },
+    moveTask({commit, dispatch}, moveData) {
+      console.log(moveData);
+      commit("removeFromList", moveData)
+      commit("addToList", moveData)
+    },
+  },
     async addComment({ commit, dispatch }, payload) {
       try {
         let res = await api.post('tasks/' + payload.taskId + '/comments', payload)
