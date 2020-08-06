@@ -33,9 +33,11 @@ export default new Vuex.Store({
       state.activeBoard = activeBoardData
     },
     setLists(state, data) {
-      Vue.set(state.tasks, data.boardId, data.lists)
+
+      Vue.set(state.lists, data.boardId, data.lists)
     },
     setTasks(state, data) {
+
       Vue.set(state.tasks, data.listId, data.tasks)
     },
     setTasktoMove(state, taskData) {
@@ -48,6 +50,11 @@ export default new Vuex.Store({
     addToList(state, moveData) {
       let list = state.lists.find(l => l.id == moveData.oldListId)
       list.tasks.push(moveData.taskToMove)
+
+    setComments(state, data) {
+
+      Vue.set(state.tasks, data.listId, data.newTask)
+
     }
 
 

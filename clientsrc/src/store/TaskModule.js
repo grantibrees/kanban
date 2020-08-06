@@ -14,7 +14,7 @@ export default {
   },
   actions: {
     getTasks({ commit, dispatch }, listId) {
-      api.get('tasks/' + listId)
+      api.get('lists/' + listId + '/tasks')
         .then(res => {
           console.log(res);
           let data = {
@@ -33,12 +33,13 @@ export default {
     },
     async editTaskDescription({ commit, dispatch }, payload) {
       try {
-        debugger
+
         let res = await api.put("tasks/" + payload.taskId, payload)
         console.log(res);
 
       } catch (error) { console.error(error) }
     },
+
     setTaskToMove({commit, dispatch}, data) {
       commit("setTaskToMove", data)
     },
@@ -46,10 +47,26 @@ export default {
       console.log(moveData);
       commit("removeFromList", moveData)
       commit("addToList", moveData)
-    }
-  
-
+    },
   },
+    async addComment({ commit, dispatch }, payload) {
+      try {
+        let res = await api.post('tasks/' + payload.taskId + '/comments', payload)
+        console.log(res);
+        let data = {
+          listId: res.data.listId,
+          newTask: [res.data]
+        }
+        commit('setComments', data)
+      } catch (error) { console.error(error) }
+    },
+    async editComment({ commit, dispatch }, payload) {
+      try {
+        let res = await api.post('tasks/' + payload.taskId + '/comments/' + payload.commentId, payload)
+        console.log(res);
+      } catch (error) { console.error(error) }
+    }
+  }
 
 }
 

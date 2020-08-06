@@ -3,6 +3,14 @@ import { BadRequest } from "../utils/Errors"
 
 
 class TasksService {
+  async getTasksByListId(id, userEmail) {
+    let data = await dbContext.Tasks.find({ listId: id, creatorEmail: userEmail })
+    if (!data) {
+      throw new BadRequest("Invalid ID or you do not own this list")
+    }
+    return data
+
+  }
 
   async getAll(userEmail) {
     return await dbContext.Tasks.find({ creatorEmail: userEmail }).populate("creator", "name picture")
