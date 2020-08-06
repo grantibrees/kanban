@@ -17,9 +17,9 @@ export class TasksController extends BaseController {
       .get('/:listId', this.getById)
       .post('', this.create)
       .post('/:id/comments', this.addComments)
-      .delete("/:id/comments/:commentId", this.deleteComment)
       .post("/:id/comments/:commentId", this.editComment)
       .put('/:id', this.edit)
+      .delete("/:id/comments/:commentId", this.deleteComment)
       .delete('/:id', this.delete)
   }
 

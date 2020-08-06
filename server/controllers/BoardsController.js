@@ -19,6 +19,7 @@ export class BoardsController extends BaseController {
       .post('', this.create)
       .put('/:id', this.edit)
       .delete('/:id', this.delete)
+      .delete('/:boardId/lists/:listId', this.deleteListByBoardId)
   }
 
 
@@ -65,6 +66,13 @@ export class BoardsController extends BaseController {
       req.body.creatorEmail = req.userInfo.email
       await boardsService.delete(req.params.id, req.userInfo.email)
       return res.send("Successfully deleted")
+    } catch (error) { next(error) }
+  }
+
+  async deleteListByBoardId(req, res, next) {
+    try {
+      let data = await listsService.deleteListsByBoardId(req.params.boardId, req.params.listId, req.userInfo.email)
+      return res.send(data)
     } catch (error) { next(error) }
   }
 }

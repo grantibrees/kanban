@@ -1,15 +1,24 @@
 <template>
-  <div class="comments col-12">
-    <h5>By: {{commentData.creatorEmail}}</h5>
-    <div @click="switchShow" v-show="toggleComment">
-      <p>{{commentBody}}</p>
-    </div>
-    <div v-show="toggleForm" class="form-group">
-      <form @submit.prevent="editComment">
-        <input type="text" class="form-control" v-model="commentBody" />
+  <div class="comments">
+    <div class="row">
+      <div @click="switchShow" v-show="toggleComment">
+        <div class="col-12">
+          <h5>{{commentBody}}</h5>
+        </div>
+        <div class="col-12">
+          <p>By: {{commentData.creatorEmail}}</p>
+        </div>
+      </div>
 
-        <button @click="switchShow" type="submit" class="btn btn-success">save</button>
-      </form>
+      <button @click="deleteComment" type="button" class="btn btn-outline-danger">X</button>
+
+      <div v-show="toggleForm" class="form-group">
+        <form @submit.prevent="editComment">
+          <input type="text" class="form-control" v-model="commentBody" />
+
+          <button @click="switchShow" type="submit" class="btn btn-success">save</button>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -25,7 +34,7 @@ export default {
       commentBody: this.commentData.body,
     };
   },
-  props: ["commentData", "taskId"],
+  props: ["commentData", "taskId", "listId"],
   computed: {},
   methods: {
     switchShow() {
@@ -41,11 +50,12 @@ export default {
       this.$store.dispatch("editComment", payload);
     },
     deleteComment() {
-      payload = {
+      let payload = {
         taskId: this.taskId,
         commentId: this.commentData._id,
+        listId: this.listId,
       };
-      this.$store.dispatch("de");
+      this.$store.dispatch("deleteComment", payload);
     },
   },
   components: {},

@@ -35,6 +35,13 @@ class ListsService {
     }
   }
 
+  async deleteListsByBoardId(boardId, listId, userEmail) {
+    let data = await dbContext.Lists.findOneAndRemove({ boardId: boardId, _id: listId, creatorEmail: userEmail });
+    if (!data) {
+      throw new BadRequest("Invalid ID or you do not own this list");
+    }
+  }
+
 }
 
 

@@ -3,6 +3,7 @@ import { BadRequest } from "../utils/Errors"
 
 
 class TasksService {
+
   async getTasksByListId(id, userEmail) {
     let data = await dbContext.Tasks.find({ listId: id, creatorEmail: userEmail })
     if (!data) {
@@ -68,7 +69,12 @@ class TasksService {
       throw new BadRequest("Invalid ID or you do not own this board");
     }
   }
-
+  async deleteTasksByListId(listId, taskId, userEmail) {
+    let data = await dbContext.Tasks.findOneAndRemove({ listId: listId, _id: taskId, creatorEmail: userEmail });
+    if (!data) {
+      throw new BadRequest("Invalid ID or you do not own this list");
+    }
+  }
 }
 
 

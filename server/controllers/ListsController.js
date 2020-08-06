@@ -8,6 +8,7 @@ import { tasksService } from '../services/TasksService'
 
 //PUBLIC
 export class ListsController extends BaseController {
+
   constructor() {
     super("api/lists")
     this.router
@@ -16,6 +17,7 @@ export class ListsController extends BaseController {
       .post('/:id', this.create)
       .put('/:id', this.edit)
       .delete('/:id', this.delete)
+      .delete('/:listId/tasks/:taskId', this.deleteTasksByListId)
   }
 
   async getTasksByListId(req, res, next) {
@@ -44,6 +46,13 @@ export class ListsController extends BaseController {
     try {
       req.body.creatorEmail = req.userInfo.email
       await listsService.delete(req.params.id, req.userInfo.email)
+      return res.send("Successfully deleted")
+    } catch (error) { next(error) }
+  }
+  async deleteTasksByListId(req, res, next) {
+    try {
+      req.body.creatorEmail = req.userInfo.email
+      await tasksService.deleteTasksByListId(req.params.listId, req.params.taskId, req.userInfo.email)
       return res.send("Successfully deleted")
     } catch (error) { next(error) }
   }

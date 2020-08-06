@@ -43,6 +43,7 @@ export default {
     setTaskToMove({ commit, dispatch }, data) {
       commit("setTaskToMove", data)
     },
+
     async moveTask({ commit, dispatch }, moveData) {
       console.log(moveData);
       try {
@@ -56,6 +57,7 @@ export default {
       } catch (error) { console.error(error) }
 
     },
+
     async addComment({ commit, dispatch }, payload) {
       try {
         let res = await api.post('tasks/' + payload.taskId + '/comments', payload)
@@ -67,12 +69,30 @@ export default {
         commit('setComments', data)
       } catch (error) { console.error(error) }
     },
+
     async editComment({ commit, dispatch }, payload) {
       try {
         let res = await api.post('tasks/' + payload.taskId + '/comments/' + payload.commentId, payload)
         console.log(res);
       } catch (error) { console.error(error) }
+    },
+
+    async deleteComment({ commit, dispatch }, payload) {
+      try {
+        let res = await api.delete('tasks/' + payload.taskId + '/comments/' + payload.commentId)
+        console.log(res);
+        dispatch("getTasks", payload.listId)
+      } catch (error) { console.error(error) }
+
+    },
+    async deleteTask({ commit, dispatch }, payload) {
+      try {
+        let res = await api.delete("lists/" + payload.listId + "/tasks/" + payload.taskId)
+        dispatch("getTasks", payload.listId)
+      } catch (error) { console.error(error) }
     }
   },
+
+
 }
 

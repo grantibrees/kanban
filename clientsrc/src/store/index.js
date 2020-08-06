@@ -54,10 +54,9 @@ export default new Vuex.Store({
     },
 
     setComments(state, data) {
-
       Vue.set(state.tasks, data.listId, data.newTask)
 
-    }
+    },
 
 
   },

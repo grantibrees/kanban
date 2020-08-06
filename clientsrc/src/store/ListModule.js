@@ -32,6 +32,12 @@ export default {
         dispatch('getLists', payload.boardId)
       } catch (error) { console.error(error) }
     },
+    async deleteList({ commit, dispatch }, payload) {
+      try {
+        let res = await api.delete('boards/' + payload.boardId + "/lists/" + payload.listId)
+        dispatch("getLists", payload.boardId)
+      } catch (error) { console.error(error) }
+    }
 
   },
 
