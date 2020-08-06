@@ -49,8 +49,12 @@ export default {
         }
         commit('setComments', data)
       } catch (error) { console.error(error) }
-
-
+    },
+    async editComment({ commit, dispatch }, payload) {
+      try {
+        let res = await api.post('tasks/' + payload.taskId + '/comments/' + payload.commentId, payload)
+        console.log(res);
+      } catch (error) { console.error(error) }
     }
   }
 

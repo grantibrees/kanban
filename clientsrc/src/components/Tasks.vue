@@ -57,27 +57,34 @@
               <div class="col-12">
                 <label @click="toggleAddComment = !toggleAddComment" for>Add a Comment</label>
               </div>
-              <div class="col-10">
-                <input
-                  slot="inputForm"
-                  v-model="commentBody"
-                  type="text"
-                  class="form-control"
-                  placeholder
-                />
-              </div>
-              <div class="col-2">
-                <button
-                  @click="addComment"
-                  slot="inputButton"
-                  class="btn btn-sm btn-outline-success"
-                >submit</button>
+              <div v-if="toggleAddComment">
+                <div class="col-10">
+                  <input
+                    slot="inputForm"
+                    v-model="commentBody"
+                    type="text"
+                    class="form-control"
+                    placeholder
+                  />
+                </div>
+                <div class="col-2">
+                  <button
+                    @click="addComment"
+                    slot="inputButton"
+                    class="btn btn-sm btn-outline-success"
+                  >submit</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
         <div slot="commentsDisplay" class="row">
-          <Comments v-for="comment in taskData.comments" :commentData="comment" :key="comment._id" />
+          <Comments
+            v-for="comment in taskData.comments"
+            :taskId="taskData.id"
+            :commentData="comment"
+            :key="comment._id"
+          />
         </div>
       </div>
     </QuickModal>
@@ -124,6 +131,8 @@ export default {
         taskId: this.taskData.id,
       };
       this.$store.dispatch("addComment", payload);
+      this.commentBody = "";
+      toggleAddComment = false;
     },
   },
 
