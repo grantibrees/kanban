@@ -3,6 +3,7 @@
     <h5>By: {{commentData.creatorEmail}}</h5>
     <div @click="switchShow" v-show="toggleComment">
       <p>{{commentBody}}</p>
+      <button @click="deleteComment" class="btn btn-danger">delete</button>
     </div>
     <div v-show="toggleForm" class="form-group">
       <form @submit.prevent="editComment">
@@ -38,7 +39,14 @@ export default {
         body: this.commentBody,
         taskId: this.taskId,
       };
+      debugger;
       this.$store.dispatch("editComment", payload);
+    },
+    deleteComment() {
+      payload = {
+        taskId: this.taskId,
+        commentId: this.commentData,
+      };
     },
   },
   components: {},

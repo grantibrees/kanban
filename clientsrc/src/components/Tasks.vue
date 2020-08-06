@@ -67,7 +67,12 @@
           </div>
         </div>
         <div slot="commentsDisplay" class="row">
-          <Comments v-for="comment in taskData.comments" :commentData="comment" :key="comment._id" />
+          <Comments
+            v-for="comment in taskData.comments"
+            :commentData="comment"
+            :taskId="taskData.id"
+            :key="comment._id"
+          />
         </div>
       </div>
     </QuickModal>
@@ -108,8 +113,8 @@ export default {
       this.showDescriptForm = !this.showDescriptForm;
     },
     moveTask() {
-      this.$emit("dragstart")
-    }
+      this.$emit("dragstart");
+    },
   },
 
   components: { QuickModal, Comments },

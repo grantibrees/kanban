@@ -43,7 +43,7 @@ export default new Vuex.Store({
     setTaskToMove(state, taskData) {
       state.tempTask = taskData;
     },
-    
+
     removeFromList(state, moveData) {
       let list = state.lists.find(l => l.id == moveData.oldListId)
       list.tasks = list.tasks.filter(i => i.id != moveData.taskToMove.id)
@@ -77,6 +77,13 @@ export default new Vuex.Store({
         console.error(err)
       }
     },
+    async editComment({ commit, dispatch }, payload) {
+      debugger
+      try {
+        let res = await api.post('tasks/' + payload.taskId + '/comments/' + payload.commentId, payload)
+        console.log(res);
+      } catch (error) { console.error(error) }
+    }
 
   },
   modules: {
