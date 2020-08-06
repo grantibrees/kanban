@@ -77,13 +77,7 @@ export default new Vuex.Store({
         console.error(err)
       }
     },
-    async editComment({ commit, dispatch }, payload) {
-      debugger
-      try {
-        let res = await api.post('tasks/' + payload.taskId + '/comments/' + payload.commentId, payload)
-        console.log(res);
-      } catch (error) { console.error(error) }
-    }
+
 
   },
   modules: {

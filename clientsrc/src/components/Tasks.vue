@@ -14,7 +14,7 @@
             <div>
               <div class="col-12">
                 <div class="row">
-                  <div @click="switchShow" v-show="taskData.body " v class="col-10">{{taskBody}}</div>
+                  <div @click="switchShow" v-show="taskData.body" class="col-10">{{taskBody}}</div>
                   <div
                     @click="switchShow"
                     v-show="!taskData.body "
@@ -49,19 +49,25 @@
           <div class="form-group">
             <div class="row">
               <div class="col-12">
-                <label for>Add a Comment</label>
+                <label @click="toggleAddComment = !toggleAddComment" for>Add a Comment</label>
               </div>
-              <div class="col-10">
-                <input
-                  slot="inputForm"
-                  v-model="commentBody"
-                  type="text"
-                  class="form-control"
-                  placeholder
-                />
-              </div>
-              <div class="col-2">
-                <button slot="inputButton" class="btn btn-sm btn-outline-success">submit</button>
+              <div v-if="toggleAddComment">
+                <div class="col-10">
+                  <input
+                    slot="inputForm"
+                    v-model="commentBody"
+                    type="text"
+                    class="form-control"
+                    placeholder
+                  />
+                </div>
+                <div class="col-2">
+                  <button
+                    @click="addComment"
+                    slot="inputButton"
+                    class="btn btn-sm btn-outline-success"
+                  >submit</button>
+                </div>
               </div>
             </div>
           </div>
@@ -91,6 +97,7 @@ export default {
       showDescription: true,
       commentBody: "",
       taskBody: this.taskData.body,
+      toggleAddComment: false,
     };
   },
   props: ["taskData"],
@@ -114,6 +121,15 @@ export default {
     },
     moveTask() {
       this.$emit("dragstart");
+    },
+    addComment() {
+      let payload = {
+        body: this.commentBody,
+        taskId: this.taskData.id,
+      };
+      this.$store.dispatch("addComment", payload);
+      this.commentBody = "";
+      this.toggleAddComment = false;
     },
   },
 

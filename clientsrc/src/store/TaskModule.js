@@ -55,20 +55,24 @@ export default {
         dispatch('getTasks', moveData.newListId)
       } catch (error) { console.error(error) }
 
+    },
+    async addComment({ commit, dispatch }, payload) {
+      try {
+        let res = await api.post('tasks/' + payload.taskId + '/comments', payload)
+        console.log(res);
+        let data = {
+          listId: res.data.listId,
+          newTask: [res.data]
+        }
+        commit('setComments', data)
+      } catch (error) { console.error(error) }
+    },
+    async editComment({ commit, dispatch }, payload) {
+      try {
+        let res = await api.post('tasks/' + payload.taskId + '/comments/' + payload.commentId, payload)
+        console.log(res);
+      } catch (error) { console.error(error) }
     }
   },
-
-  async addComment({ commit, dispatch }, payload) {
-    try {
-      let res = await api.post('tasks/' + payload.taskId + '/comments', payload)
-      console.log(res);
-      let data = {
-        listId: res.data.listId,
-        newTask: [res.data]
-      }
-      commit('setComments', data)
-    } catch (error) { console.error(error) }
-  },
-
 }
 
