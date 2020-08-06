@@ -14,7 +14,7 @@
         </form>
       </div>
     </div>
-    <tasks v-for="task in tasksData" :taskData="task" :key="task.id" draggable="true" @dragstart="reorderTask(task)"/>
+    <tasks v-for="task in tasksData" :taskData="task" :key="task.id"  @dragstart="reorderTask(task)"/>
   </div>
 </template>
 
