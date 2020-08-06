@@ -40,9 +40,10 @@ export default new Vuex.Store({
 
       Vue.set(state.tasks, data.listId, data.tasks)
     },
-    setTasktoMove(state, taskData) {
+    setTaskToMove(state, taskData) {
       state.tempTask = taskData;
     },
+    
     removeFromList(state, moveData) {
       let list = state.lists.find(l => l.id == moveData.oldListId)
       list.tasks = list.tasks.filter(i => i.id != moveData.taskToMove.id)
@@ -50,6 +51,7 @@ export default new Vuex.Store({
     addToList(state, moveData) {
       let list = state.lists.find(l => l.id == moveData.oldListId)
       list.tasks.push(moveData.taskToMove)
+    },
 
     setComments(state, data) {
 

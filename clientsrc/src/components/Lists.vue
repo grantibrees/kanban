@@ -14,7 +14,7 @@
         </form>
       </div>
     </div>
-    <tasks v-for="task in tasksData" :taskData="task" :key="task.id" draggable="true" @dragstart="reorderTask(task, index)"/>
+    <tasks v-for="task in tasksData" :taskData="task" :key="task.id" draggable="true" @dragstart="reorderTask(task)"/>
   </div>
 </template>
 
@@ -41,6 +41,10 @@ export default {
     tasksData() {
       return this.$store.state.tasks[this.listData.id];
     },
+
+    tempTask() {
+      return this.$store.state.tempTask;
+    }
   },
 
   methods: {
@@ -59,11 +63,13 @@ export default {
         newListId: this.listData.id,
         oldListId: this.tempTask.oldList.id,
         taskToMove: this.tempTask.task,
-      }
+      };
+
+      this.$store.dispatch("moveTask",moveData)
     },
 
-    reorderTask() {
-      console.log(item, index);
+    reorderTask(task) {
+      console.log(task);
       this.$store.dispatch("setTaskToMove", {
         task: task,
         oldList: this.listData
