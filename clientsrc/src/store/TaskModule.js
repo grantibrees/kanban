@@ -38,7 +38,16 @@ export default {
         console.log(res);
 
       } catch (error) { console.error(error) }
+    },
+    setTaskToMove({commit, dispatch}, data) {
+      commit("setTaskToMove", data)
+    },
+    moveTask({commit, dispatch}, moveData) {
+      console.log(moveData);
+      commit("removeFromList", moveData)
+      commit("addToList", moveData)
     }
+  
 
   },
 

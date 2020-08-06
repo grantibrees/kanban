@@ -1,5 +1,5 @@
 <template>
-  <div class="tasks border border-black">
+  <div class="tasks border border-black" @dragstart="moveTask()">
     <div data-toggle="modal" :data-target="'#task-' + taskData.listId">
       <h1>{{taskData.title}}</h1>
     </div>
@@ -107,6 +107,9 @@ export default {
       this.showDescription = !this.showDescription;
       this.showDescriptForm = !this.showDescriptForm;
     },
+    moveTask() {
+      this.$emit("dragstart");
+    }
   },
 
   components: { QuickModal, Comments },
