@@ -41,9 +41,13 @@ export default {
     },
     async addComment({ commit, dispatch }, payload) {
       try {
-        let res = await api.post('tasks/' + payload.taskID + '/comments', payload.body)
+        let res = await api.post('tasks/' + payload.taskId + '/comments', payload)
         console.log(res);
-        // commit('addComment', payload.body)
+        let data = {
+          listId: res.data.listId,
+          newTask: [res.data]
+        }
+        commit('setComments', data)
       } catch (error) { console.error(error) }
 
 

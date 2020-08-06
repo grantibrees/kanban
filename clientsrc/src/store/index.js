@@ -36,7 +36,13 @@ export default new Vuex.Store({
       Vue.set(state.lists, data.boardId, data.lists)
     },
     setTasks(state, data) {
+
       Vue.set(state.tasks, data.listId, data.tasks)
+    },
+    setComments(state, data) {
+
+      Vue.set(state.tasks, data.listId, data.newTask)
+
     }
   },
   actions: {
