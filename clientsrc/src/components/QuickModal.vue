@@ -24,10 +24,15 @@
               </div>
               <div class="row">
                 <slot name="listBody"></slot>
-                <slot name="taskDescription"></slot>
-                <slot name="taskBody"></slot>
-                <slot class="commentsDisplay"></slot>
-                <slot name="commentsForm"></slot>
+                <div class="col-12">
+                  <slot name="taskDescription"></slot>
+                </div>
+                <div class="col-12">
+                  <slot class="commentsDisplay"></slot>
+                </div>
+                <div class="col-12">
+                  <slot name="taskBody"></slot>
+                </div>
               </div>
             </div>
           </div>

@@ -3,13 +3,15 @@
     <div class="row">
       <div @click="switchShow" v-show="toggleComment">
         <div class="col-12">
-          <h5>{{commentBody}}</h5>
-        </div>
-        <div class="col-12">
-          <p>By: {{commentData.creatorEmail}}</p>
+          <div class="row">
+            <h5>{{commentBody}}</h5>
+          </div>
+
+          <div class="row">
+            <p>By: {{commentData.creatorEmail}}</p>
+          </div>
         </div>
       </div>
-
       <button @click="deleteComment" type="button" class="btn btn-outline-danger">X</button>
 
       <div v-show="toggleForm" class="form-group">

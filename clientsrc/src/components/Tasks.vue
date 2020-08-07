@@ -1,92 +1,91 @@
 <template>
   <div class="tasks border border-black" @dragstart="moveTask()">
     <div draggable="true" data-toggle="modal" :data-target="'#task-' + taskData.listId">
-      <div class="justify-content-between">
+      <div>
         <h1>{{taskData.title}}</h1>
       </div>
       <p>comments: {{taskData.comments.length}}</p>
+    </div>
 
-      <QuickModal :id="'task-' + taskData.listId" :key="'key-' + taskData.listId">
-        <div slot="title">{{taskData.title}}</div>
+    <QuickModal :id="'task-' + taskData.listId" :key="'key-' + taskData.listId">
+      <div slot="title">{{taskData.title}}</div>
 
-        <div slot="taskDescription">
-          <div v-if="showDescriptForm == false">
-            <div class="row">
-              <div>
-                <div class="col-12">
-                  <div class="row">
-                    <div @click="switchShow" v-show="taskData.body" class="col-10">{{taskBody}}</div>
-                    <div
-                      @click="switchShow"
-                      v-show="!taskData.body "
-                      class="col-10"
-                    >Please insert a description...</div>
-                    <div class="col-2">
-                      <button
-                        class="btn btn-outline-primary btn-sm"
-                        @click="showDescriptForm = !showDescriptForm"
-                      >Edit</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
+      <div slot="taskDescription">
+        <div v-if="showDescriptForm == false">
           <div class="row">
-            <div v-if="taskData.body">
-              <div v-if="showDescriptForm">
-                <div class="form-group">
-                  <form @submit.prevent="putTaskDescription">
-                    <input type="text" class="form-control" v-model="taskBody" />
-                    <button @click="switchShow" type="submit" class="btn btn-success">save</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div slot="taskBody">
-            <div class="form-group">
-              <div class="row">
-                <div class="col-12">
-                  <label @click="toggleAddComment = !toggleAddComment" for>Add a Comment</label>
-                </div>
-                <div v-if="toggleAddComment">
-                  <div class="col-10">
-                    <input
-                      slot="inputForm"
-                      v-model="commentBody"
-                      type="text"
-                      class="form-control"
-                      placeholder
-                    />
-                  </div>
+            <div>
+              <div class="col-12">
+                <div class="row">
+                  <div @click="switchShow" v-show="taskData.body" class="col-10">{{taskBody}}</div>
+                  <div
+                    @click="switchShow"
+                    v-show="!taskData.body "
+                    class="col-10"
+                  >Please insert a description...</div>
                   <div class="col-2">
-                    <button
-                      @click="addComment"
-                      slot="inputButton"
-                      class="btn btn-sm btn-outline-success"
-                    >submit</button>
+                    <button class="btn btn-outline-primary btn-sm" @click="switchShow">Edit</button>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div slot="commentsDisplay" class="row">
-            <div class="col-12">
-              <Comments
-                v-for="comment in taskData.comments"
-                :commentData="comment"
-                :taskId="taskData.id"
-                :listId="taskData.listId"
-                :key="comment._id"
-              />
             </div>
           </div>
         </div>
-      </QuickModal>
-    </div>
+
+        <div class="row">
+          <div v-if="taskData.body">
+            <div v-if="showDescriptForm">
+              <div class="form-group">
+                <form @submit.prevent="putTaskDescription">
+                  <input type="text" class="form-control" v-model="taskBody" />
+                  <button @click="switchShow" type="submit" class="btn btn-success">save</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div slot="commentsDisplay" class="row">
+        <div class="col-12">
+          <Comments
+            v-for="comment in taskData.comments"
+            :commentData="comment"
+            :taskId="taskData.id"
+            :listId="taskData.listId"
+            :key="comment._id"
+          />
+        </div>
+      </div>
+
+      <div slot="taskBody">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-12">
+              <label @click="toggleAddComment = !toggleAddComment" for>Add a Comment</label>
+            </div>
+            <div v-if="toggleAddComment">
+              <div class="col-10">
+                <input
+                  slot="inputForm"
+                  v-model="commentBody"
+                  type="text"
+                  class="form-control"
+                  placeholder
+                />
+              </div>
+              <div class="col-2">
+                <button
+                  @click="addComment"
+                  slot="inputButton"
+                  class="btn btn-sm btn-outline-success"
+                >submit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </QuickModal>
+
     <button class="btn btn-outline-danger btn-sm" @click="deleteTask">-</button>
   </div>
 </template>
