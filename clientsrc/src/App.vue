@@ -54,6 +54,6 @@ export default {
 }
 
 .spacing {
-  height: 30px;
+  height: 50px;
 }
 </style>
