@@ -10,7 +10,7 @@
         class="btn btn-primary btn-lg"
         data-toggle="modal"
         data-target="#one"
-      >Modal 1</button>
+      >Add Task</button>
     </div>
     <div class="row">
       <div class="d-flex overflow-page">

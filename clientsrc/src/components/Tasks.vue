@@ -45,17 +45,7 @@
         </div>
       </div>
 
-      <div slot="commentsDisplay" class="row">
-        <div class="col-12">
-          <Comments
-            v-for="comment in taskData.comments"
-            :commentData="comment"
-            :taskId="taskData.id"
-            :listId="taskData.listId"
-            :key="comment._id"
-          />
-        </div>
-      </div>
+      <div slot="commentsDisplay"></div>
 
       <div slot="taskBody">
         <div class="form-group">
@@ -81,6 +71,17 @@
                 >submit</button>
               </div>
             </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <Comments
+              v-for="comment in taskData.comments"
+              :commentData="comment"
+              :taskId="taskData.id"
+              :listId="taskData.listId"
+              :key="comment._id"
+            />
           </div>
         </div>
       </div>
