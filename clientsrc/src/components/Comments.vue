@@ -75,5 +75,6 @@ export default {
 <style scoped>
 .icons {
   background-color: blue;
+  color: aquamarine;
 }
 </style>
