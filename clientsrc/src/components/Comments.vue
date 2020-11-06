@@ -4,21 +4,29 @@
       <div @click="switchShow" v-show="toggleComment">
         <div class="col-12">
           <div class="row">
-            <h5>{{commentBody}}</h5>
+            <h5>{{ commentBody }}</h5>
           </div>
 
           <div class="row">
-            <p>By: {{commentData.creatorEmail}}</p>
+            <p>By: {{ commentData.creatorEmail }}</p>
           </div>
         </div>
       </div>
-      <button @click="deleteComment" type="button" class="btn btn-outline-danger">X</button>
+      <button
+        @click="deleteComment"
+        type="button"
+        class="btn btn-outline-danger"
+      >
+        X
+      </button>
 
       <div v-show="toggleForm" class="form-group">
         <form @submit.prevent="editComment">
           <input type="text" class="form-control" v-model="commentBody" />
 
-          <button @click="switchShow" type="submit" class="btn btn-success">save</button>
+          <button @click="switchShow" type="submit" class="btn btn-success">
+            save
+          </button>
         </form>
       </div>
     </div>
@@ -65,4 +73,7 @@ export default {
 </script>
 
 <style scoped>
+.icons {
+  background-color: blue;
+}
 </style>
